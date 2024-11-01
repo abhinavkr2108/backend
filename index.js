@@ -22,6 +22,9 @@ const prisma = new PrismaClient({
   log: ["query", "info", "warn", "error"],
 });
 
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 app.post("/api/scrape", async (req, res) => {
   const { quote, fromDate, toDate } = req.body;
 
