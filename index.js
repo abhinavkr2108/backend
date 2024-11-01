@@ -62,19 +62,19 @@ app.post("/api/scrape", async (req, res) => {
       });
     });
 
-    const insertData = data.map((row) => ({
-      date: row[0],
-      open: parseFloat(row[1]),
-      high: parseFloat(row[2]),
-      low: parseFloat(row[3]),
-      close: parseFloat(row[4]),
-      adjClose: parseFloat(row[5]),
-      volume: row[6],
-    }));
+    // const insertData = data.map((row) => ({
+    //   date: row[0],
+    //   open: parseFloat(row[1]),
+    //   high: parseFloat(row[2]),
+    //   low: parseFloat(row[3]),
+    //   close: parseFloat(row[4]),
+    //   adjClose: parseFloat(row[5]),
+    //   volume: row[6],
+    // }));
 
-    const result = await prisma.currency.createMany({
-      data: insertData,
-    });
+    // const result = await prisma.currency.createMany({
+    //   data: insertData,
+    // });
 
     console.log("RESULT");
     console.log(result);
@@ -116,19 +116,19 @@ app.post("/api/forex-data", async (req, res) => {
       });
     });
 
-    const insertData = data.map((row) => ({
-      date: row[0],
-      open: parseFloat(row[1]),
-      high: parseFloat(row[2]),
-      low: parseFloat(row[3]),
-      close: parseFloat(row[4]),
-      adjClose: parseFloat(row[5]),
-      volume: row[6],
-    }));
+    // const insertData = data.map((row) => ({
+    //   date: row[0],
+    //   open: parseFloat(row[1]),
+    //   high: parseFloat(row[2]),
+    //   low: parseFloat(row[3]),
+    //   close: parseFloat(row[4]),
+    //   adjClose: parseFloat(row[5]),
+    //   volume: row[6],
+    // }));
 
-    const result = await prisma.currency.createMany({
-      data: insertData,
-    });
+    // const result = await prisma.currency.createMany({
+    //   data: insertData,
+    // });
 
     console.log("RESULT");
     console.log(result);
@@ -207,19 +207,19 @@ async function scrapeData(quote, period) {
     });
   });
 
-  const insertData = data.map((row) => ({
-    date: row[0],
-    open: parseFloat(row[1]),
-    high: parseFloat(row[2]),
-    low: parseFloat(row[3]),
-    close: parseFloat(row[4]),
-    adjClose: parseFloat(row[5]),
-    volume: row[6],
-  }));
+  // const insertData = data.map((row) => ({
+  //   date: row[0],
+  //   open: parseFloat(row[1]),
+  //   high: parseFloat(row[2]),
+  //   low: parseFloat(row[3]),
+  //   close: parseFloat(row[4]),
+  //   adjClose: parseFloat(row[5]),
+  //   volume: row[6],
+  // }));
 
-  const result = await prisma.currency.createMany({
-    data: insertData,
-  });
+  // const result = await prisma.currency.createMany({
+  //   data: insertData,
+  // });
 
   await browser.close();
   return data;
