@@ -3,7 +3,6 @@ import express from "express";
 import cors from "cors";
 import cron from "node-cron";
 import { PrismaClient } from "@prisma/client";
-import chromium from "chrome-aws-lambda";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -47,9 +46,8 @@ app.post("/api/scrape", async (req, res) => {
 
   try {
     const browser = await puppeteer.launch({
-      args: chromium.args,
-      executablePath: await chromium.executablePath,
-      headless: chromium.headless,
+      args: ["--no-sandbox", "--disable-setuid-sandbox", "--no-zygote"],
+      headless: true,
       ignoreHTTPSErrors: true,
     });
     const page = await browser.newPage();
@@ -102,9 +100,8 @@ app.post("/api/forex-data", async (req, res) => {
 
   try {
     const browser = await puppeteer.launch({
-      args: chromium.args,
-      executablePath: await chromium.executablePath,
-      headless: chromium.headless,
+      args: ["--no-sandbox", "--disable-setuid-sandbox", "--no-zygote"],
+      headless: true,
       ignoreHTTPSErrors: true,
     });
     const page = await browser.newPage();
@@ -195,9 +192,8 @@ async function scrapeData(quote, period) {
   )}/history?period1=${fromDate}&period2=${toDate}`;
 
   const browser = await puppeteer.launch({
-    args: chromium.args,
-    executablePath: await chromium.executablePath,
-    headless: chromium.headless,
+    args: ["--no-sandbox", "--disable-setuid-sandbox", "--no-zygote"],
+    headless: true,
     ignoreHTTPSErrors: true,
   });
   const page = await browser.newPage();
