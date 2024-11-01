@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import cron from "node-cron";
 import { PrismaClient } from "@prisma/client";
+import chromium from "chrome-aws-lambda";
 
 const corsOptions = {
   origin: "*",
@@ -33,7 +34,12 @@ app.post("/api/scrape", async (req, res) => {
   )}/history?period1=${fromDate}&period2=${toDate}`;
 
   try {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
+      ignoreHTTPSErrors: true,
+    });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle2" });
 
@@ -83,7 +89,12 @@ app.post("/api/forex-data", async (req, res) => {
   )}/history?period1=${fromDate}&period2=${toDate}`;
 
   try {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
+      ignoreHTTPSErrors: true,
+    });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle2" });
 
@@ -171,7 +182,12 @@ async function scrapeData(quote, period) {
     quote
   )}/history?period1=${fromDate}&period2=${toDate}`;
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: chromium.args,
+    executablePath: await chromium.executablePath,
+    headless: chromium.headless,
+    ignoreHTTPSErrors: true,
+  });
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: "networkidle2" });
 
