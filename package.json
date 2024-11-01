@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon backend/index.js",
-    "build": "npm install && npx puppeteer browsers install chrome && npx puppeteer install chrome && npx prisma generate && next build && npx prisma generate --schema=backend/prisma/schema.prisma && pnpm install --prefix frontend && npm run build --prefix frontend",
-    "start": "node backend/index.js",
+    "dev": "nodemon index.js",
+    "build": "npm install && npx prisma generate && npx prisma generate --schema=prisma/schema.prisma && npx puppeteer browsers install chrome && npx puppeteer install chrome",
+    "start": "node index.js",
     "heroku-postbuild": "npm run build && mkdir  ./.cache && mv /app/.cache/puppeteer ./.cache",
-    "postinstall": "npx prisma generate"
+    "postinstall": "npx prisma generate && npx prisma generate --schema=prisma/schema.prisma "
   },
   "keywords": [],
   "author": "",
