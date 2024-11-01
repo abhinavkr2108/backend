@@ -8,6 +8,7 @@
     "dev": "nodemon backend/index.js",
     "build": "npm install && npx puppeteer browsers install chrome && npx puppeteer install chrome && npx prisma generate && next build && npx prisma generate --schema=backend/prisma/schema.prisma && pnpm install --prefix frontend && npm run build --prefix frontend",
     "start": "node backend/index.js",
+    "heroku-postbuild": "npm run build && mkdir  ./.cache && mv /app/.cache/puppeteer ./.cache",
     "postinstall": "npx prisma generate"
   },
   "keywords": [],
