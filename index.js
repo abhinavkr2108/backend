@@ -75,9 +75,6 @@ app.post("/api/scrape", async (req, res) => {
     //   data: insertData,
     // });
 
-    console.log("RESULT");
-    console.log(result);
-
     await browser.close();
     res.json({ data });
   } catch (error) {
@@ -128,9 +125,6 @@ app.post("/api/forex-data", async (req, res) => {
     // const result = await prisma.currency.createMany({
     //   data: insertData,
     // });
-
-    console.log("RESULT");
-    console.log(result);
 
     await browser.close();
     res.json({ data });
