@@ -3,15 +3,19 @@ import express from "express";
 import cors from "cors";
 import cron from "node-cron";
 import dotenv from "dotenv";
+import bodyParser from "body-parser";
 
 dotenv.config();
 const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(
   cors({
     origin: ["http://localhost:3000", "https://vance-fullstack.vercel.app"],
     methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
@@ -68,9 +72,9 @@ app.post("/api/scrape", async (req, res) => {
     // const result = await prisma.currency.createMany({
     //   data: insertData,
     // });
+    res.json({ data });
 
     await browser.close();
-    res.json({ data });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error scraping data" });
@@ -119,9 +123,8 @@ app.post("/api/forex-data", async (req, res) => {
     // const result = await prisma.currency.createMany({
     //   data: insertData,
     // });
-
-    await browser.close();
     res.json({ data });
+    await browser.close();
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error scraping data" });
