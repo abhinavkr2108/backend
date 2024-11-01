@@ -2,7 +2,6 @@ import puppeteer from "puppeteer";
 import express from "express";
 import cors from "cors";
 import cron from "node-cron";
-import { PrismaClient } from "@prisma/client";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -26,9 +25,9 @@ app.use(
 
 app.use(express.json());
 
-const prisma = new PrismaClient({
-  log: ["query", "info", "warn", "error"],
-});
+// const prisma = new PrismaClient({
+//   log: ["query", "info", "warn", "error"],
+// });
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
